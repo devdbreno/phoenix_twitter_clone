@@ -2,10 +2,10 @@ use Mix.Config
 
 # Configure your database
 config :phoenix_twitter_clone, PhoenixTwitterClone.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "phoenix_twitter_clone_dev",
-  hostname: "localhost",
+  database: System.get_env("DB_NAME") || "pgsqldb_dev",
+  hostname: System.get_env("DB_HOST") || "localhost",
+  username: System.get_env("DB_USER") || "pgsqluser_dev",
+  password: System.get_env("DB_PASSWORD") || "pgsqlpass_dev",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
@@ -16,7 +16,7 @@ config :phoenix_twitter_clone, PhoenixTwitterClone.Repo,
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :phoenix_twitter_clone, PhoenixTwitterCloneWeb.Endpoint,
-  http: [port: 4000],
+  http: [port: System.get_env("PORT") || 4000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
